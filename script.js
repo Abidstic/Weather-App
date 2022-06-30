@@ -24,26 +24,27 @@ let weather = {
     document.querySelector(".icon").src =
       "http://openweathermap.org/img/wn/" + icon + ".png";
     document.querySelector(".description").innerText = description;
-    document.querySelector(".temp").innerText = temp + "°C";
+    document.querySelector(".temp").innerText = Math.round(parseInt(temp)) + "°C";
     document.querySelector(".humidity").innerText =
       "Humidity :" + humidity + "%";
     document.querySelector(".wind").innerText = "Wind Speed :" + speed + "km/h";
     document.querySelector(".weather").classList.remove("loading");
     document.body.style.backgroundImage =
       "url('https://source.unsplash.com/1600x900/?"+ name +"')";
-    document.querySelector(".temp").addEventListener("click",()=>{
-      if(document.querySelector(".temp").innerText.includes("C")){
-        document.querySelector(".temp").innerText =Math.floor(temp * 1.8 + 32) + "°F";
-      }
-      else{
-        document.querySelector(".temp").innerText = temp + "°C";
-      }
-    });
   },
   search: function () {
     this.fetchWeather(document.querySelector(".searchBox").value);
   },
 };
+const tempText = document.querySelector('.temp');
+tempText.addEventListener('click', e => {
+  const t = tempText.innerText.split('°')[0];
+  if (tempText.innerText.includes('C')) {
+    tempText.innerText = Math.round(parseInt(t) * 1.8 + 32) + '°F';
+  } else {
+    tempText.innerText = Math.round((parseInt(t) - 32) * 0.556) + '°C';
+  }
+});
 document.querySelector(".searchButton").addEventListener("click", function () {
   weather.search();
 });
