@@ -69,10 +69,30 @@ h1.temp{
 .flex{
   display: flex;
   align-items: center;
+  justify-content: space-between;
+
+}
+.des{
+  display: flex;
+ align-items: center;
 }
 .description{
   text-transform: capitalize;
   margin-left:8px;
+}
+.location{
+  height: 3.2em;
+  width: 3.2em;
+  border: none;
+  outline: none;
+  margin: .5em;
+  border-radius: 50%;
+  color: white;
+  background: #413f3f29;
+  transition: .2s ease-in-out;
+  cursor: pointer;
+
+  
 }
 .weather.loading{
   visibility: hidden;
@@ -87,4 +107,5 @@ h1.temp{
   top: 0;
   left: 20px;
 }
+
 

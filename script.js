@@ -15,6 +15,26 @@ let weather = {
       }
     });
   },
+  fetchWeather2: function(lat,long){
+    fetch(
+        "https://api.openweathermap.org/data/2.5/weather?lat=" +
+            lat +
+            "&lon=" +
+            long +
+            "&appid=" +
+            this.apiKey +
+            "&units=metric"
+    ).then((response) => {
+        if (response.status === 200) {
+            response
+                .json()
+                .then((data) => console.log(this.displayWeather(data)));
+        } else if (response.status === 404) {
+            alert("City not found");
+        }
+    });
+
+  },
   displayWeather: function (data) {
     const { name } = data;
     const { description, icon } = data.weather[0];
@@ -55,5 +75,28 @@ document
       weather.search();
     }
   });
+  document.querySelector(".location").addEventListener("click",()=>{
+    if(navigator.geolocation)
+    {
+      navigator.geolocation.getCurrentPosition(onSuccess,onError);
+
+    }
+    else
+    {
+      alert("Your Browser is Faltu");
+    }
+
+  });
+  function onSuccess(position)
+  {
+    var lat = position.coords.latitude;
+    var long = position.coords.longitude;
+    weather.fetchWeather2(lat,long);
+  }
+  
+  function onError(error)
+  {
+    console.log(error);
+  }
  weather.fetchWeather("Dhaka");
 
