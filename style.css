@@ -88,11 +88,14 @@ h1.temp{
   margin: .5em;
   border-radius: 50%;
   color: white;
-  background: #413f3f29;
+  background: #64616129;
   transition: .2s ease-in-out;
   cursor: pointer;
 
   
+}
+.location:hover{
+  background: rgba(192, 185, 185, 0.336);
 }
 .weather.loading{
   visibility: hidden;
